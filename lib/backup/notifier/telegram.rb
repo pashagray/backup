@@ -43,11 +43,8 @@ module Backup
         msg = message.call(model, status: status_data_for(status))
 
         opts = {
-          headers: { "User-Agent" => "Backup/#{VERSION}" }
-            .merge(headers).reject { |_, value| value.nil? }
-            .merge("Content-Type" => "application/x-www-form-urlencoded"),
-          body: URI.encode_www_form({ "text" => msg, "chat_id" => chat_id }
-          expects: success_codes # raise error if unsuccessful
+          headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+          body: URI.encode_www_form({ "text" => msg, "chat_id" => chat_id })
         }
         opts[:ssl_verify_peer] = ssl_verify_peer unless ssl_verify_peer.nil?
         opts[:ssl_ca_file] = ssl_ca_file if ssl_ca_file
