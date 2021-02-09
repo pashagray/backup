@@ -11,6 +11,19 @@ module Backup
       # Bot must be included as admin to chat
       attr_accessor :chat_id
 
+      ##
+      # Verify the server's certificate when using SSL.
+      #
+      # This will default to +true+ for most systems.
+      # It may be forced by setting to +true+, or disabled by setting to +false+.
+      attr_accessor :ssl_verify_peer
+
+      ##
+      # Path to a +cacert.pem+ file to use for +ssl_verify_peer+.
+      #
+      # This is provided (via Excon), but may be specified if needed.
+      attr_accessor :ssl_ca_file
+
       def initialize(model, &block)
         super
         instance_eval(&block) if block_given?
